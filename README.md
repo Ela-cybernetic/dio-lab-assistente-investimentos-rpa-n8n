@@ -134,7 +134,7 @@ Conecte o Agente de IA do N8N a um modelo como Gemini ou GPT para:
 
 ### Desafio Completo
 
-- [ ] Todos os itens do MVP
+- [x] Todos os itens do MVP
 - [ ] Integração com Agente de IA no N8N
 - [ ] Mensagens geradas dinamicamente via LLM
 - [ ] Documentação explicando as decisões técnicas
@@ -149,7 +149,7 @@ Conecte o Agente de IA do N8N a um modelo como Gemini ou GPT para:
 ├── 📁 n8n/
 │   └── 📄 assistente-investimentos.json            # ✅Workflow exportado do N8N
 ├── 📁 ngrok/
-│   └── 📄 passo-a-passo.ngrok.md  
+│   └── 📄 passo-a-passo-ngrok.md  
 └── 📁 docs/
 │   ├── 📄 index.html               # ✅ Página de clientes (já implementado)
 │   └── 📄 data.csv                 # ✅ Opções de investimento (já implementado)
