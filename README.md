@@ -8,6 +8,9 @@ Neste desafio, você vai construir um assistente de investimentos automatizado. 
 
 O projeto foi pensado para ser simples e acessível, mesmo para quem está dando os primeiros passos em Python e automação. A ideia é que você entenda o conceito de RPA de forma leve e aplique tudo em um cenário realista do mercado financeiro.
 
+
+>✅ MVP concluído: O workflow foi implementado com sucesso utilizando Python, Webhook, N8N e uma base CSV hospedada no GitHub. O fluxo realiza a extração de clientes, cruza os dados com opções de investimento e gera recomendações personalizadas.
+
 ## Objetivo do Projeto
 
 Desenvolver um pipeline de automação que:
