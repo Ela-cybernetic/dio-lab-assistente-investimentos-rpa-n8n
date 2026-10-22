@@ -124,10 +124,10 @@ Conecte o Agente de IA do N8N a um modelo como Gemini ou GPT para:
 
 ### MVP (Mínimo Viável)
 
-- [✅] Repositório forkado com o workflow N8N implementado
-- [✅] Workflow N8N exportado (`n8n/workflow.json`) com mensagens estáticas
-- [✅] Script de RPA integrado ao Webhook do N8N
-- [v] Print ou vídeo demonstrando o fluxo funcionando de ponta a ponta
+  ✅ Repositório forkado com o workflow N8N implementado
+  ✅ Workflow N8N exportado (`n8n/workflow.json`) com mensagens estáticas
+  ✅ Script de RPA integrado ao Webhook do N8N
+  ✅ Print ou vídeo demonstrando o fluxo funcionando de ponta a ponta
 
 ### Desafio Completo
 
@@ -179,13 +179,20 @@ Conecte o Agente de IA do N8N a um modelo como Gemini ou GPT para:
 
 ![Webhook](screenshots/01-webhook-recebendo-clientes.png)
 
+O Webhook do n8n recebeu os dados enviados pelo script Python via POST. 
+
 ### 2. Leitura da base de investimentos
 
 ![HTTP Request](screenshots/02-http-request-investimentos.png)
 
+O nó HTTP Request consulta o arquivo data.csv hospedado no GitHub e recupera as opções de investimento.
+
+
 ### 3. Normalização dos investimentos
 
 ![Code](screenshots/03-normalizacao-investimentos.png)
+
+O nó Code converte os dados do CSV em uma estrutura JSON e normaliza os valores mínimos para processamento.
 
 ### 4. Cruzamento de dados
 
