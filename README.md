@@ -124,10 +124,10 @@ Conecte o Agente de IA do N8N a um modelo como Gemini ou GPT para:
 
 ### MVP (Mínimo Viável)
 
-- [ ] Repositório forkado com o workflow N8N implementado
-- [ ] Workflow N8N exportado (`n8n/workflow.json`) com mensagens estáticas
-- [ ] Script de RPA integrado ao Webhook do N8N
-- [ ] Print ou vídeo demonstrando o fluxo funcionando de ponta a ponta
+- [✅] Repositório forkado com o workflow N8N implementado
+- [✅] Workflow N8N exportado (`n8n/workflow.json`) com mensagens estáticas
+- [✅] Script de RPA integrado ao Webhook do N8N
+- [✅] Print ou vídeo demonstrando o fluxo funcionando de ponta a ponta
 
 ### Desafio Completo
 
@@ -141,13 +141,20 @@ Conecte o Agente de IA do N8N a um modelo como Gemini ou GPT para:
 ```
 📁 dio-lab-assistente-investimentos-rpa-n8n/
 ├── 📄 README.md
-├── 📁 src/
+├── 📁 rpa/
 │   └── 📄 extrair_clientes.ipynb   # ✅ Notebook Python (já implementado, falta só o TODO)
 ├── 📁 n8n/
-│   └── 📄 workflow.json            # 🎯 Seu desafio: exportar o workflow aqui
+│   └── 📄 assistente-investimentos.json            # 🎯MEU WORKFLOW
 └── 📁 docs/
-    ├── 📄 index.html               # ✅ Página de clientes (já implementado)
-    └── 📄 data.csv                 # ✅ Opções de investimento (já implementado)
+│   ├── 📄 index.html               # ✅ Página de clientes (já implementado)
+│   └── 📄 data.csv                 # ✅ Opções de investimento (já implementado)
+└── 📁 screenshots/
+    ├── 01-webhook-recebendo-clientes.png
+    ├── 02-http-request-investimentos.png
+    ├── 03-normalizacao-investimentos.png
+    ├── 04-merge-clientes-investimentos.png
+    ├── 05-geracao-mensagens.png
+    └── 06-resposta-final.png
 ```
 
 ## Prompts Úteis para Copilotos de IA
@@ -166,7 +173,28 @@ Conecte o Agente de IA do N8N a um modelo como Gemini ou GPT para:
 - [GitHub Pages: Guia Rápido](https://pages.github.com/)
 
 ---
+## Evidências
 
-**Bons estudos e mãos à obra** 🚀
+### 1. Recebimento dos clientes via Webhook
 
-Se tiver dúvidas, lembre-se: a melhor forma de aprender é experimentando. Erre, corrija e celebre cada pequena vitória no caminho.
+![Webhook](screenshots/01-webhook-recebendo-clientes.png)
+
+### 2. Leitura da base de investimentos
+
+![HTTP Request](screenshots/02-http-request-investimentos.png)
+
+### 3. Normalização dos investimentos
+
+![Code](screenshots/03-normalizacao-investimentos.png)
+
+### 4. Cruzamento de dados
+
+![Merge](screenshots/04-merge-clientes-investimentos.png)
+
+### 5. Geração das recomendações
+
+![Mensagens](screenshots/05-geracao-mensagens.png)
+
+### 6. Resultado final
+
+![Resultado](screenshots/06-resposta-final.png)
