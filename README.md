@@ -11,6 +11,16 @@ O projeto foi pensado para ser simples e acessível, mesmo para quem está dando
 
 >**✅ MVP concluído:** O workflow foi implementado com sucesso utilizando Python, Webhook, N8N e uma base CSV hospedada no GitHub. O fluxo realiza a extração de clientes, cruza os dados com opções de investimento e gera recomendações personalizadas com mensagens estáticas.
 
+## Navegação Rápida
+
+- [Objetivo do Projeto](#objetivo-do-projeto)
+- [Arquitetura do Projeto](#arquitetura-do-projeto)
+- [Tecnologias e Ferramentas](#tecnologias-e-ferramentas)
+- [Entregáveis](#entregáveis)
+- [Evidências](#evidências)
+- [Guia do ngrok](ngrok/passo-a-passo-ngrok.md)
+
+
 ## Objetivo do Projeto
 
 Desenvolver um pipeline de automação que:
