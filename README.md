@@ -9,7 +9,7 @@ Neste desafio, você vai construir um assistente de investimentos automatizado. 
 O projeto foi pensado para ser simples e acessível, mesmo para quem está dando os primeiros passos em Python e automação. A ideia é que você entenda o conceito de RPA de forma leve e aplique tudo em um cenário realista do mercado financeiro.
 
 
->✅ MVP concluído: O workflow foi implementado com sucesso utilizando Python, Webhook, N8N e uma base CSV hospedada no GitHub. O fluxo realiza a extração de clientes, cruza os dados com opções de investimento e gera recomendações personalizadas.
+>**✅ MVP concluído:** O workflow foi implementado com sucesso utilizando Python, Webhook, N8N e uma base CSV hospedada no GitHub. O fluxo realiza a extração de clientes, cruza os dados com opções de investimento e gera recomendações personalizadas com mensagens estáticas.
 
 ## Objetivo do Projeto
 
@@ -147,7 +147,7 @@ Conecte o Agente de IA do N8N a um modelo como Gemini ou GPT para:
 ├── 📁 rpa/
 │   └── 📄 extrair_clientes.ipynb   # ✅ Notebook Python (já implementado, falta só o TODO)
 ├── 📁 n8n/
-│   └── 📄 assistente-investimentos.json            # 🎯MEU WORKFLOW
+│   └── 📄 assistente-investimentos.json            # Workflow exportado do N8N
 └── 📁 docs/
 │   ├── 📄 index.html               # ✅ Página de clientes (já implementado)
 │   └── 📄 data.csv                 # ✅ Opções de investimento (já implementado)
@@ -180,31 +180,38 @@ Conecte o Agente de IA do N8N a um modelo como Gemini ou GPT para:
 
 ### 1. Recebimento dos clientes via Webhook
 
+O Webhook do n8n recebeu os dados enviados pelo script Python via POST. 
+
 ![Webhook](screenshots/01-webhook-recebendo-clientes.png)
 
-O Webhook do n8n recebeu os dados enviados pelo script Python via POST. 
+>colocar que precisei usar o ngrok
 
 ### 2. Leitura da base de investimentos
 
-![HTTP Request](screenshots/02-http-request-investimentos.png)
-
 O nó HTTP Request consulta o arquivo data.csv hospedado no GitHub e recupera as opções de investimento.
 
+![HTTP Request](screenshots/02-http-request-investimentos.png)
 
 ### 3. Normalização dos investimentos
 
-![Code](screenshots/03-normalizacao-investimentos.png)
-
 O nó Code converte os dados do CSV em uma estrutura JSON e normaliza os valores mínimos para processamento.
 
+![Code](screenshots/03-normalizacao-investimentos.png)
+
 ### 4. Cruzamento de dados
+
+O nó Merge combina os dados dos clientes recebidos pelo Webhook com a base de investimentos carregada do CSV.
 
 ![Merge](screenshots/04-merge-clientes-investimentos.png)
 
 ### 5. Geração das recomendações
 
+O nó Code realiza a lógica de seleção dos investimentos compatíveis e gera recomendações personalizadas para cada cliente.
+
 ![Mensagens](screenshots/05-geracao-mensagens.png)
 
 ### 6. Resultado final
+
+O workflow retorna uma resposta estruturada contendo os dados dos clientes, investimentos recomendados e mensagens personalizadas.
 
 ![Resultado](screenshots/06-resposta-final.png)
