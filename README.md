@@ -186,6 +186,7 @@ Conecte o Agente de IA do N8N a um modelo como Gemini ou GPT para:
 - [Documentação do N8N](https://docs.n8n.io/)
 - [BeautifulSoup: Web Scraping com Python](https://realpython.com/beautiful-soup-web-scraper-python/)
 - [GitHub Pages: Guia Rápido](https://pages.github.com/)
+- [Documentação do ngrok](https://ngrok.com/docs)
 
 ---
 ## Evidências
