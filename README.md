@@ -147,7 +147,9 @@ Conecte o Agente de IA do N8N a um modelo como Gemini ou GPT para:
 ├── 📁 rpa/
 │   └── 📄 extrair_clientes.ipynb   # ✅ Notebook Python (já implementado, falta só o TODO)
 ├── 📁 n8n/
-│   └── 📄 assistente-investimentos.json            # Workflow exportado do N8N
+│   └── 📄 assistente-investimentos.json            # ✅Workflow exportado do N8N
+├── 📁 ngrok/
+│   └── 📄 passo-a-passo.ngrok.md  
 └── 📁 docs/
 │   ├── 📄 index.html               # ✅ Página de clientes (já implementado)
 │   └── 📄 data.csv                 # ✅ Opções de investimento (já implementado)
@@ -184,7 +186,7 @@ O Webhook do n8n recebeu os dados enviados pelo script Python via POST.
 
 ![Webhook](screenshots/01-webhook-recebendo-clientes.png)
 
->colocar que precisei usar o ngrok
+> Durante os testes, utilizei o ngrok para conectar o Google Colab ao n8n executado localmente no Docker Desktop. Essa solução permitiu receber os dados do RPA via Webhook sem a necessidade de publicar o n8n em um servidor externo. Acesse o passo-a-passo-ngrok-aqui
 
 ### 2. Leitura da base de investimentos
 
