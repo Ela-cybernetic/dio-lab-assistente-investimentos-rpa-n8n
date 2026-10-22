@@ -79,7 +79,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const clientes = $json.body;\nconst investimentos = $json.investimentos;\n\nconst resultados = clientes.map(cliente => {\n\n  const saldoNum = Number(\n    cliente.saldo\n      .replace(\"R$\", \"\")\n      .replace(/\\./g, \"\")\n      .replace(\",\", \".\")\n      .trim()\n  );\n\n  const opcoes = investimentos.filter(\n    inv => inv.perfil === cliente.perfil\n  );\n\n  const recomendacao =\n    opcoes.find(inv => saldoNum >= inv.minimo) ||\n    opcoes[0];\n\n  return {\n    nome: cliente.nome,\n    email: cliente.email,\n    perfil: cliente.perfil,\n    saldo_texto: cliente.saldo,\n    saldo_num: saldoNum,\n    recomendacao,\n    mensagem: `Olá ${cliente.nome}! Pelo seu perfil ${cliente.perfil}, recomendamos o investimento ${recomendacao.produto} com rentabilidade de ${recomendacao.rentabilidade}.`\n  };\n});\n\nreturn [{\n  json: {\n    ok: true,\n    total_clientes: clientes.length,\n    total_investimentos: investimentos.length,\n    resultados\n  }\n}];"
+        "jsCode": "const clientes = $json.body;\nconst investimentos = $json.investimentos;\n\nconst resultados = clientes.map(cliente => {\n\n  const saldoNum = Number(\n    cliente.saldo\n      .replace(\"R$\", \"\")\n      .replace(/\\./g, \"\")\n      .replace(\",\", \".\")\n      .trim()\n  );\n\n  const opcoes = investimentos.filter(\n    inv => inv.perfil === cliente.perfil\n  );\n\n  const elegiveis = opcoes.filter(\n    inv => saldoNum >= inv.minimo\n  );\n  \n  const recomendacao =\n    elegiveis.sort((a, b) => b.minimo - a.minimo)[0]\n    || opcoes[0];\n\n  return {\n    nome: cliente.nome,\n    email: cliente.email,\n    perfil: cliente.perfil,\n    saldo_texto: cliente.saldo,\n    saldo_num: saldoNum,\n    recomendacao,\n    mensagem: `Olá ${cliente.nome}! Pelo seu perfil ${cliente.perfil}, recomendamos o investimento ${recomendacao.produto} com rentabilidade de ${recomendacao.rentabilidade}.`\n  };\n});\n\nreturn [{\n  json: {\n    ok: true,\n    total_clientes: clientes.length,\n    total_investimentos: investimentos.length,\n    resultados\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -164,7 +164,7 @@
     "executionOrder": "v1",
     "binaryMode": "separate"
   },
-  "versionId": "36ff4e61-800f-4113-ab79-c8d97fcf2033",
+  "versionId": "d5773814-2a7a-41f1-b793-6d14fb5d2d86",
   "meta": {
     "instanceId": "04dd0969e449f7b3a49034daf357944d64c8359217d31b69ed613ab0c88ed294"
   },
