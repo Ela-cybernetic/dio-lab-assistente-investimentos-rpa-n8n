@@ -186,7 +186,7 @@ O Webhook do n8n recebeu os dados enviados pelo script Python via POST.
 
 ![Webhook](screenshots/01-webhook-recebendo-clientes.png)
 
-> Durante os testes, utilizei o ngrok para conectar o Google Colab ao n8n executado localmente no Docker Desktop. Essa solução permitiu receber os dados do RPA via Webhook sem a necessidade de publicar o n8n em um servidor externo. Acesse o Acesse o [passo a passo completo do ngrok](ngrok/passo-a-passo-ngrok.md).
+> Durante os testes, utilizei o ngrok para conectar o Google Colab ao n8n executado localmente no Docker Desktop. Essa solução permitiu receber os dados do RPA via Webhook sem a necessidade de publicar o n8n em um servidor externo. Acesse o [passo a passo completo do ngrok](ngrok/passo-a-passo-ngrok.md).
 
 ### 2. Leitura da base de investimentos
 
