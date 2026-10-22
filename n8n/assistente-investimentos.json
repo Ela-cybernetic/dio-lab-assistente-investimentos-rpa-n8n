@@ -1,0 +1,174 @@
+{
+  "name": "Assistente de Investimentos",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "Clientes",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -336,
+        -32
+      ],
+      "id": "8422af2a-e35e-4e2a-bbe7-a2cf93a05702",
+      "name": "Webhook",
+      "webhookId": "91426d34-5aae-4da1-afe2-bb391c15c371"
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        528,
+        -160
+      ],
+      "id": "e95fa2fc-278d-405d-a99d-546f8f79bcb9",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "url": "https://raw.githubusercontent.com/Ela-cybernetic/dio-lab-assistente-investimentos-rpa-n8n/refs/heads/main/docs/data.csv",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        -128,
+        80
+      ],
+      "id": "5ff7c29a-2bf7-4e60-ac09-5b37abd6264f",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Pega o CSV como texto vindo do HTTP Request\nconst csvRaw = $json.data ?? $json.body ?? $json;\n\nconst text = (typeof csvRaw === \"string\")\n  ? csvRaw\n  : JSON.stringify(csvRaw);\n\nconst lines = text\n  .split(/\\r?\\n/)\n  .map(l => l.trim())\n  .filter(Boolean);\n\nconst headers = lines[0].split(\",\").map(h => h.trim());\n\nconst investimentos = lines.slice(1).map(line => {\n  const cols = line.split(\",\").map(c => c.trim());\n\n  const obj = {};\n\n  headers.forEach((h, i) => {\n    obj[h] = cols[i] ?? \"\";\n  });\n\n  // Normaliza mínimo para número\n  obj.minimo = Number(\n    String(obj.minimo).replace(/[^\\d]/g, \"\")\n  ) || 0;\n\n  return obj;\n});\n\nreturn [{ json: { investimentos } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        48,
+        80
+      ],
+      "id": "7b996a94-d056-4889-b677-02b837fb0584",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        176,
+        -160
+      ],
+      "id": "f55cf4e7-46a3-466a-a51d-8c1e0328a993",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "jsCode": "const clientes = $json.body;\nconst investimentos = $json.investimentos;\n\nconst resultados = clientes.map(cliente => {\n\n  const saldoNum = Number(\n    cliente.saldo\n      .replace(\"R$\", \"\")\n      .replace(/\\./g, \"\")\n      .replace(\",\", \".\")\n      .trim()\n  );\n\n  const opcoes = investimentos.filter(\n    inv => inv.perfil === cliente.perfil\n  );\n\n  const recomendacao =\n    opcoes.find(inv => saldoNum >= inv.minimo) ||\n    opcoes[0];\n\n  return {\n    nome: cliente.nome,\n    email: cliente.email,\n    perfil: cliente.perfil,\n    saldo_texto: cliente.saldo,\n    saldo_num: saldoNum,\n    recomendacao,\n    mensagem: `Olá ${cliente.nome}! Pelo seu perfil ${cliente.perfil}, recomendamos o investimento ${recomendacao.produto} com rentabilidade de ${recomendacao.rentabilidade}.`\n  };\n});\n\nreturn [{\n  json: {\n    ok: true,\n    total_clientes: clientes.length,\n    total_investimentos: investimentos.length,\n    resultados\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        336,
+        -160
+      ],
+      "id": "bc6bce2a-87a9-4e6f-ac4b-dfbf0d58354e",
+      "name": "Code in JavaScript1"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Respond to Webhook": {
+      "main": [
+        []
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "36ff4e61-800f-4113-ab79-c8d97fcf2033",
+  "meta": {
+    "instanceId": "04dd0969e449f7b3a49034daf357944d64c8359217d31b69ed613ab0c88ed294"
+  },
+  "nodeGroups": [],
+  "id": "uiWMVYxYQ3lO0LVs",
+  "tags": []
+}
